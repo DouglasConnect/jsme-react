@@ -1,8 +1,8 @@
 # jsme
 
-> Jsme
+## Development
 
-[![NPM](https://img.shields.io/npm/v/jsme.svg)](https://www.npmjs.com/package/jsme) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+Open two terminals, in one do `npm start` at the root level, in the other `npm start` in the example directory.
 
 ## Install
 
