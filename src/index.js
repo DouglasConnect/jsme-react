@@ -1,4 +1,4 @@
-import './JSME_2017-02-26/jsme/jsme.nocache'
+import jsme from './JSME_2017-02-26/jsme/jsme.nocache.js'
 import React, { Component } from 'react'
 // import styles from './styles.css'
 
@@ -21,7 +21,7 @@ export default class Jsme extends React.Component {
     }
   }
   componentDidMount() {
-    jsmeApplet = new JSApplet.JSME(this.id, "380px", "340px");
+    jsmeApplet = new jsme.JSME(this.id, "380px", "340px");
   }
 
   componentWillUnmount() {
