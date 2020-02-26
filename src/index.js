@@ -1,6 +1,6 @@
-import jsme from './JSME_2017-02-26/jsme/jsme.nocache.js'
-import React, { Component } from 'react'
-// import styles from './styles.css'
+//import './JSME_2017-02-26/jsme/jsme.nocache'
+import React from 'react'
+import styles from './styles.css'
 
 function getRandomInt(min, max) {
   min = Math.ceil(min)
@@ -8,28 +8,39 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min //The maximum is exclusive and the minimum is inclusive
 }
 
-export default class Jsme extends React.Component {
-  constructor(props) {
+let jsmeIsLoaded = false;
+let jsmeCallbacks = {};
+
+window.jsmeOnLoad = () => {
+  Object.values(jsmeCallbacks)
+    .forEach(f => f())
+  jsmeIsLoaded = true;
+}
+
+export default class Jsme extends React.PureComponent {
+  constructor() {
     super()
-    console.log("test")
     this.myRef = React.createRef()
-    if (props.hasOwnProperty("id")) {
-      this.id = props.id
-    }
-    else {
-      this.id = "jsme" + getRandomInt(1, 100000)
-    }
+    this.id = "jsme" + getRandomInt(1, 100000)
   }
+
+  handleJsmeLoad = () => {
+      this.jsmeApplet = new window.JSApplet.JSME(this.id, "380px", "340px");
+  }
+
   componentDidMount() {
-    jsmeApplet = new jsme.JSME(this.id, "380px", "340px");
+    if (jsmeIsLoaded) {
+      this.handleJsmeLoad()
+    } else {
+      jsmeCallbacks[this.id] = this.handleJsmeLoad
+    }
   }
 
   componentWillUnmount() {
+    jsmeCallbacks[this.id] = undefined;
   }
 
   render() {
-    return <div ref={this.myRef} id={this.id}>
-      <p>{this.id}</p>
-      </div>
+    return <div ref={this.myRef} id={this.id}></div>
   }
 }

@@ -5,7 +5,6 @@ import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
 import url from 'rollup-plugin-url'
 import svgr from '@svgr/rollup'
-import externalGlobals from "rollup-plugin-external-globals"
 
 import pkg from './package.json'
 
@@ -24,20 +23,18 @@ export default {
     }
   ],
   plugins: [
-    externalGlobals({
-      jsme: "JSApplet"
-    }),
     external(),
+    babel({
+      exclude: 'node_modules/**',
+      plugins: [ '@babel/plugin-external-helpers', '@babel/plugin-proposal-class-properties' ],
+      presets: ['@babel/preset-env', '@babel/preset-react'],
+    }),
     postcss({
       modules: true
     }),
     url(),
     svgr(),
-    babel({
-      exclude: 'node_modules/**',
-      plugins: [ 'external-helpers' ]
-    }),
     resolve(),
-    commonjs()
+    commonjs(),
   ]
 }
