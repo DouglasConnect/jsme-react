@@ -34,15 +34,23 @@ export default class Jsme extends React.PureComponent {
     else {
       this.jsmeApplet = new window.JSApplet.JSME(this.id, this.initialWidth, this.initialHeight);
     }
+    this.jsmeApplet.setCallBack("AfterStructureModified", this.handleChange);
+  }
 
+  handleChange(jsmeEvent) {
+    if (this.props.onChange) {
+      this.props.onChange(jsmeEvent.src.smiles())
+    }
   }
 
   componentDidMount() {
+    this.handleChange = this.handleChange.bind(this);
     if (jsmeIsLoaded) {
       this.handleJsmeLoad()
     } else {
       jsmeCallbacks[this.id] = this.handleJsmeLoad
     }
+
   }
 
   componentWillUnmount() {
@@ -68,5 +76,6 @@ export default class Jsme extends React.PureComponent {
 Jsme.propTypes = {
   height: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
-  options: PropTypes.string
+  options: PropTypes.string,
+  onChange: PropTypes.func
 }

@@ -26,10 +26,14 @@ npm install --save jsme-react
 import Jsme from 'jsme'
 
 export default class App extends Component {
+  logSmiles(smiles) {
+    console.log(smiles)
+  }
+
   render () {
     return (
       <div>
-        <Jsme height="300px" width="400px" options="oldlook,star"/>
+        <Jsme height="300px" width="400px" options="oldlook,star"  onChange={this.logSmiles}/>
       </div>
     )
   }
@@ -38,7 +42,14 @@ export default class App extends Component {
 
 ## Props
 
-JSME take the required `height` and `width` props that have to be strings, and an optional `options` prop that is a comma separated string of JSME options. The available options are described on the [JSME documentation page](https://peter-ertl.com/jsme/JSME_2017-02-26/doc.html#JSME_API)
+Required props
+
+* `height`: string, e.g. "300px"
+* `width`: string, e.g. "400px"
+
+Optional props
+* `options`: string that is a comma separated string of JSME options. The available options are described on the [JSME documentation page](https://peter-ertl.com/jsme/JSME_2017-02-26/doc.html#JSME_API)
+* `onChange`: event handler that is passed the smiles whenever it is changed in the editor
 
 
 # Development
