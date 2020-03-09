@@ -1,4 +1,3 @@
-//import './JSME_2017-02-26/jsme/jsme.nocache'
 import React from 'react'
 import styles from './styles.css'
 

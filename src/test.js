@@ -1,7 +1,7 @@
-import ExampleComponent from './'
+import Jsme from './'
 
-describe('ExampleComponent', () => {
+describe('Jsme', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(Jsme).toBeTruthy()
   })
 })

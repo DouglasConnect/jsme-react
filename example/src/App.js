@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
-import ExampleComponent from 'jsme'
+import Jsme from 'jsme'
 
 export default class App extends Component {
   render () {
     return (
       <div>
-        <ExampleComponent text='Modern React component module' />
+        <Jsme/>
+        <Jsme/>
       </div>
     )
   }
