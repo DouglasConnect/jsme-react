@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './styles.css'
+import PropTypes from 'prop-types'
 
 function getRandomInt(min, max) {
   min = Math.ceil(min)
@@ -17,14 +18,23 @@ window.jsmeOnLoad = () => {
 }
 
 export default class Jsme extends React.PureComponent {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.myRef = React.createRef()
     this.id = "jsme" + getRandomInt(1, 100000)
+    this.initialHeight = props.height
+    this.initialWidth = props.width
+    this.initialOptions = props.options
   }
 
   handleJsmeLoad = () => {
-      this.jsmeApplet = new window.JSApplet.JSME(this.id, "380px", "340px");
+    if (this.initialOptions) {
+      this.jsmeApplet = new window.JSApplet.JSME(this.id, this.initialWidth, this.initialHeight, { options: this.initialOptions } );
+    }
+    else {
+      this.jsmeApplet = new window.JSApplet.JSME(this.id, this.initialWidth, this.initialHeight);
+    }
+
   }
 
   componentDidMount() {
@@ -39,7 +49,24 @@ export default class Jsme extends React.PureComponent {
     jsmeCallbacks[this.id] = undefined;
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.jsmeApplet !== null) {
+      if (this.props.height !== prevProps.height || this.props.width !== prevProps.width) {
+        this.jsmeApplet.setSize(this.props.width, this.props.height)
+      }
+      if (this.props.options !== prevProps.options) {
+        this.jsmeApplet.options({options: this.props.options})
+      }
+    }
+  }
+
   render() {
     return <div ref={this.myRef} id={this.id}></div>
   }
+}
+
+Jsme.propTypes = {
+  height: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
+  options: PropTypes.string
 }

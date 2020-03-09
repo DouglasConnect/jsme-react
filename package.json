@@ -1,6 +1,6 @@
 {
   "name": "jsme-react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Jsme react wrapper - allows using the JSME molecule editor as a react component",
   "author": "douglasconnect",
   "license": "BSD-3-Clause",
@@ -58,5 +58,7 @@
   "files": [
     "dist"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  }
 }

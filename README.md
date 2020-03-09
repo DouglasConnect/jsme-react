@@ -29,12 +29,17 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <Jsme/>
+        <Jsme height="300px" width="400px" options="oldlook,star"/>
       </div>
     )
   }
 }
 ```
+
+## Props
+
+JSME take the required `height` and `width` props that have to be strings, and an optional `options` prop that is a comma separated string of JSME options. The available options are described on the [JSME documentation page](https://peter-ertl.com/jsme/JSME_2017-02-26/doc.html#JSME_API)
+
 
 # Development
 
@@ -43,4 +48,4 @@ Open two terminals, in one do `npm start` at the root level, in the other `npm s
 
 ## License
 
-BSD © [douglasconnect](https://github.com/douglasconnect)
+BSD-3 © [EdelweissConnect](https://github.com/douglasconnect)
