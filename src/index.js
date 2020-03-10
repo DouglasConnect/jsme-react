@@ -22,29 +22,25 @@ export default class Jsme extends React.PureComponent {
     super(props)
     this.myRef = React.createRef()
     this.id = "jsme" + getRandomInt(1, 100000)
-    this.initialHeight = props.height
-    this.initialWidth = props.width
-    this.initialOptions = props.options
   }
 
   handleJsmeLoad = () => {
-    if (this.initialOptions) {
-      this.jsmeApplet = new window.JSApplet.JSME(this.id, this.initialWidth, this.initialHeight, { options: this.initialOptions } );
+    if (this.props.options) {
+      this.jsmeApplet = new window.JSApplet.JSME(this.id, this.props.width, this.props.height, { options: this.props.options } );
     }
     else {
-      this.jsmeApplet = new window.JSApplet.JSME(this.id, this.initialWidth, this.initialHeight);
+      this.jsmeApplet = new window.JSApplet.JSME(this.id, this.props.width, this.props.height);
     }
     this.jsmeApplet.setCallBack("AfterStructureModified", this.handleChange);
   }
 
-  handleChange(jsmeEvent) {
+  handleChange = (jsmeEvent) => {
     if (this.props.onChange) {
       this.props.onChange(jsmeEvent.src.smiles())
     }
   }
 
   componentDidMount() {
-    this.handleChange = this.handleChange.bind(this);
     if (jsmeIsLoaded) {
       this.handleJsmeLoad()
     } else {
