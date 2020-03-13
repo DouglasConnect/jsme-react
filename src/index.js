@@ -32,6 +32,7 @@ export default class Jsme extends React.PureComponent {
       this.jsmeApplet = new window.JSApplet.JSME(this.id, this.props.width, this.props.height);
     }
     this.jsmeApplet.setCallBack("AfterStructureModified", this.handleChange);
+    this.jsmeApplet.readGenericMolecularInput(this.props.smiles)
   }
 
   handleChange = (jsmeEvent) => {
@@ -61,6 +62,9 @@ export default class Jsme extends React.PureComponent {
       if (this.props.options !== prevProps.options) {
         this.jsmeApplet.options({options: this.props.options})
       }
+      if (this.props.smiles !== prevProps.smiles) {
+        this.jsmeApplet.readGenericMolecularInput(this.props.smiles)
+      }
     }
   }
 
@@ -72,6 +76,7 @@ export default class Jsme extends React.PureComponent {
 Jsme.propTypes = {
   height: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
+  smiles: PropTypes.string,
   options: PropTypes.string,
   onChange: PropTypes.func
 }
