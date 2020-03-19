@@ -2,7 +2,9 @@
 
 This project wraps the BSD licensed [JSME molecule editor](https://peter-ertl.com/jsme/) (by B. Bienfait and P. Ertl) in a React component for easy use in React apps.
 
-Please note that JSME was originally developed in Java and transpiled and you have to manually include it with a script tag in your HTML's head - this NPM library can't depend on it correctly and let your bundler take care of it because of how the JSME javascript is loaded.
+Please note that JSME was originally developed in Java and transpiled to Javascript. By modern Javascript standards it uses a few unconventional techniques to load. To accomodate this this library will perform a side effect when the component is being loaded in the browser of appending the script tag that loads the JSME Javascript entrypoint (which will then trigger a few more loads). This works with lazy loading of Javascript modules.
+
+If for some reason you want this loading to happen at a specific (early) point in time you can call the setup function of this module which will perform the steps described above.
 
 ## How to use
 
@@ -17,7 +19,7 @@ npm install --save jsme-react
 #### Step two: use the react component
 
 ```javascript
-import Jsme from 'jsme'
+import { Jsme } from 'jsme'
 
 export default class App extends Component {
   logSmiles(smiles) {

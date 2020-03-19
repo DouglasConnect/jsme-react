@@ -24,7 +24,7 @@ export function setup(src = "https://peter-ertl.com/jsme/JSME_2017-02-26/jsme/js
   }
 }
 
-export default class Jsme extends React.PureComponent {
+export class Jsme extends React.PureComponent {
   constructor(props) {
     super(props)
     this.myRef = React.createRef()
