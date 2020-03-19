@@ -9,12 +9,19 @@ function getRandomInt(min, max) {
 }
 
 let jsmeIsLoaded = false;
-let jsmeCallbacks = {};
+const jsmeCallbacks = {};
 
-window.jsmeOnLoad = () => {
-  Object.values(jsmeCallbacks)
-    .forEach(f => f())
-  jsmeIsLoaded = true;
+// Export the setup function so that a user can override the super-lazy loading behaviour and choose to load it more eagerly.
+export function setup(src = "https://peter-ertl.com/jsme/JSME_2017-02-26/jsme/jsme.nocache.js") {
+  const script = document.createElement('script');
+  script.src = src;
+  document.head.appendChild(script);
+
+  window.jsmeOnLoad = () => {
+    Object.values(jsmeCallbacks)
+      .forEach(f => f());
+    jsmeIsLoaded = true;
+  }
 }
 
 export default class Jsme extends React.PureComponent {
@@ -43,9 +50,12 @@ export default class Jsme extends React.PureComponent {
 
   componentDidMount() {
     if (jsmeIsLoaded) {
-      this.handleJsmeLoad()
+      this.handleJsmeLoad();
     } else {
-      jsmeCallbacks[this.id] = this.handleJsmeLoad
+      if (!window.jsmeOnLoad) {
+        setup(this.props.src);
+      }
+      jsmeCallbacks[this.id] = this.handleJsmeLoad;
     }
 
   }
@@ -78,5 +88,6 @@ Jsme.propTypes = {
   width: PropTypes.string.isRequired,
   smiles: PropTypes.string,
   options: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  src: PropTypes.string,
 }

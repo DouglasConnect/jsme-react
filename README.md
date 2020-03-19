@@ -6,13 +6,7 @@ Please note that JSME was originally developed in Java and transpiled and you ha
 
 ## How to use
 
-#### Step one: add a script tag to your HTML to load the upstream original or a local copy:
-
-```html
-<script src="https://peter-ertl.com/jsme/JSME_2017-02-26/jsme/jsme.nocache.js"></script>
-```
-
-#### Step two: add this library to your project
+#### Step one: add this library to your project
 
 ```bash
 yarn add jsme-react
@@ -20,7 +14,7 @@ yarn add jsme-react
 npm install --save jsme-react
 ```
 
-#### Step three: use the react component
+#### Step two: use the react component
 
 ```javascript
 import Jsme from 'jsme'
@@ -51,6 +45,7 @@ Optional props
 * `options`: string that is a comma separated string of JSME options. The available options are described on the [JSME documentation page](https://peter-ertl.com/jsme/JSME_2017-02-26/doc.html#JSME_API)
 * `onChange`: event handler that is passed the smiles whenever it is changed in the editor
 * `smiles`: the smiles to display (when not set an empty canvas will be shown)
+* `src`: url of the jsme source code. Default value is `"https://peter-ertl.com/jsme/JSME_2017-02-26/jsme/jsme.nocache.js`
 
 
 # Development
