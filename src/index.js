@@ -12,7 +12,7 @@ let jsmeIsLoaded = false;
 const jsmeCallbacks = {};
 
 // Export the setup function so that a user can override the super-lazy loading behaviour and choose to load it more eagerly.
-export function setup(src = "https://peter-ertl.com/jsme/JSME_2017-02-26/jsme/jsme.nocache.js") {
+export function setup(src = "https://jsme.cloud.douglasconnect.com/JSME_2020-06-11/jsme/jsme.nocache.js") {
   const script = document.createElement('script');
   script.src = src;
   document.head.appendChild(script);
