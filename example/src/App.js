@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Jsme } from 'jsme'
+import { Jsme } from 'jsme-react'
 
 export default class App extends Component {
   logSmiles(smiles) {
