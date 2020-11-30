@@ -9,7 +9,7 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <Jsme height="300px" width="400px" options="oldlook,star" onChange={this.logSmiles} />
+        <Jsme height="300px" width="400px" options="oldlook,star" onChange={this.logSmiles} parameters={{guicolor: "#FFAA00", markerIconColor: "FF0000"}} />
         <Jsme height="300px" width="600px" smiles="CC=O" onChange={this.logSmiles}/>
       </div>
     )
