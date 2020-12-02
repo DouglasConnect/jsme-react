@@ -65,7 +65,7 @@ export class Jsme extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.jsmeApplet !== null) {
+    if (this.jsmeApplet !== undefined && this.jsmeApplet !== null) {
       if (this.props.height !== prevProps.height || this.props.width !== prevProps.width) {
         this.jsmeApplet.setSize(this.props.width, this.props.height)
       }
